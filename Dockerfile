@@ -9,5 +9,5 @@ RUN mkdir /app
 WORKDIR /app
 COPY ./app /user/local/app/
 
-# RUN adduser -S moxi newuser
-# USER newuser
+RUN adduser -D user
+USER user
