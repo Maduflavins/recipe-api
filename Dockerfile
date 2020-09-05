@@ -7,7 +7,7 @@ RUN pip install -r /requirements.txt
 
 RUN mkdir /app
 WORKDIR /app
-COPY ./app /app
+COPY ./app /user/local/app/
 
 # RUN adduser -S moxi newuser
 # USER newuser
