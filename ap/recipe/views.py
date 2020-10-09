@@ -3,7 +3,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import Tag, Ingredient
+from core.models import Tag, Ingredient, Recipe
 from recipe import serializers
 
 class BaseRecipeAtrrViewSet(viewsets.GenericViewSet,
@@ -35,3 +35,17 @@ class IngredientViewSet(BaseRecipeAtrrViewSet):
     """Manage listing of ingredients"""
     queryset = Ingredient.objects.all()
     serializer_class = serializers.IngredientSerializer
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    """Manage recipes in the database"""
+    serializer_class = serializers.RecipeSerializer
+    queryset = Recipe.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Retrieve the receipes for the authenticated user"""
+        return self.queryset.filter(user=self.request.user)
+    
+
