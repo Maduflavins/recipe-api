@@ -54,5 +54,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return serializers.RecipeDetailSerializer
         return self.serializer_class
+        
     
 
